@@ -9,6 +9,9 @@
 # [] headscale route53 A record (part of the sandbox.opentlc.com hosted zone)
 # [] default vpc
 
+# TODO
+# [] IP elastic IP being assigned changes on ec2 instance reboot, not ideal for A record
+
 
 # include vars from config file
 . ./config.sh

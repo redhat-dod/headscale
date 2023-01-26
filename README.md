@@ -1,9 +1,11 @@
-# headscale
-Deploy Headscale to AWS
+# Headscale
+Deploy self hosted Headscale to AWS
 
-- Configure variables in config.sh
+- Request an AWS Open Environment from demo.redhat.com
+- Clone this repo: `git clone https://github.com/redhat-dod/headscale.git & cd headscale`
 - Install the aws cli, authenticate into your account. 
 - Install jq
+- Configure variables in config.sh
 
 Run the script:
 ```bash

@@ -9,7 +9,7 @@ DELIM="::-----> "
 main_function() {
   echo "${DELIM}starting headscale server install..."
   echo "${DELIM}installing required packages..."
-  dnf install wget podman bind-utils firewalld -y
+  dnf install wget podman vim bind-utils firewalld -y
   
   echo "${DELIM}setting firewalld rules..."
   systemctl enable --now firewalld
