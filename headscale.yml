@@ -1,0 +1,58 @@
+---
+- name: install & configure headscale on RHEL9
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: download tailscale release
+      ansible.builtin.get_url:
+        url: https://github.com/juanfont/headscale/releases/download/v0.19.0/headscale_0.19.0_linux_amd64
+        dest: /usr/local/bin/headscale
+        mode: '0755'
+
+    - name: create directory
+      ansible.builtin.file:
+        state: directory
+        mode: '0644'
+        path: "{{ item }}"
+      loop:
+        - /etc/headscale
+        - /var/lib/headscale
+
+    - name: create headscale group
+      ansible.builtin.group:
+        name: headscale
+        state: present
+
+    - name: create headscale user
+      ansible.builtin.user:
+        name: headscale
+        home: /var/lib/headscale
+        shell: /usr/bin/nologin
+        group: headscale
+
+    - name: create empty sqlite file
+      ansible.builtin.file:
+        state: touch
+        path: /var/lib/headscale/db.sqlite
+
+    - name: place headscale config.yaml file
+      ansible.builtin.copy:
+        src: ./config.yaml
+        dest: 
+
+    - name: place headscale systemd unit file
+      ansible.builtin.copy:
+        src: ./headscale.service
+        dest: /etc/systemd/system/headscale.service
+
+    - name: load headscale service
+      ansible.builtin.systemd:
+        daemon_reload: true
+        enabled: true
+        state: started
+        name: headscale.service
+
+    - name: check headscale metrics endpoint
+      uri:
+        url: http://127.0.0.1:9090/metrics
+        method: GET

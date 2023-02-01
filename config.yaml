@@ -16,8 +16,8 @@ server_url: https://headscale.sandbox140.opentlc.com:443
 # Address to listen to / bind to on the server
 #
 # For production:
-# listen_addr: 0.0.0.0:8080
-listen_addr: 127.0.0.1:8080
+listen_addr: 0.0.0.0:8080
+
 
 # Address to listen to /metrics, you may want
 # to keep this endpoint private to your internal
@@ -265,7 +265,8 @@ dns_config:
 # Unix socket used for the CLI to connect without authentication
 # Note: for production you will want to set this to something like:
 # unix_socket: /var/run/headscale.sock
-unix_socket: ./headscale.sock
+unix_socket: /var/run/headscale/headscale.sock
+#unix_socket: ./headscale.sock
 unix_socket_permission: "0770"
 #
 # headscale supports experimental OpenID connect support,

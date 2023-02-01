@@ -36,11 +36,11 @@ main_function() {
 
   echo "::starting headscale container..."
   # todo, run this as a user with su -c 
-  podman run -d --name headscale -v /opt/headscale/config:/etc/headscale:Z \
-    -p 8080:8080 \
-    -p 9090:9090 \
-    docker.io/headscale/headscale:latest \
-    headscale serve
+  #podman run -d --name headscale -v /opt/headscale/config:/etc/headscale:Z \
+  #  -p 8080:8080 \
+  #  -p 9090:9090 \
+  #  docker.io/headscale/headscale:latest \
+  #  headscale serve
   
 
 }
